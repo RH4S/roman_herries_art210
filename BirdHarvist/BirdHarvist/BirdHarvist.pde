@@ -2,9 +2,11 @@ import processing.sound.*;
 import de.looksgood.ani.*;
 
 Bob s;
+Basket b;
 int nSnake = 13;
+int counter = 0;
 Snake[] z = new Snake[nSnake];
-boolean test = true;
+boolean test = false;
 Synth boing;
 PFont myfont;
 
@@ -113,6 +115,7 @@ void splash_mouseClicked()
 void game_init()
 {
   boing = new Synth(this,1);
+  b = new Basket("basket");
   s = new Bob("test");
   for(int i =0; i < nSnake; i =  i + 1)
   {
@@ -128,6 +131,9 @@ void game_run()
   s.display();
   s.update();
   s.check();
+  b.display();
+  b.update();
+  b.check();
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i].display();
