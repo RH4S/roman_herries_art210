@@ -9,7 +9,7 @@ class Snake extends Sprite
     this.registerAnimation(new Animation("snake","png"));
     this.location.y = -this.h;
     this.location.x = random(100,width-100);
-    this.preLocY = 0;
+    
     this.rotation = 90.0;
     this.w = 60;
     this.h = 60;
@@ -43,10 +43,11 @@ class Snake extends Sprite
       this.velocity.x = 0;
       this.velocity.y = 0;
       this.acceleration.y = 0;  
-      this.preLocY = this.preLocY+100;
+
       this.scale = 0.25;
       counter = counter + 1;
       println(counter);
+      
     }
    
     

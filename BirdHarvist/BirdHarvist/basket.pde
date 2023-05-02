@@ -4,14 +4,14 @@ class Basket extends Sprite
   {
     super(id);
     this.registerAnimation(new Animation("basket","png"));
-    this.location.y = 50;
-    this.location.x = 50;
-    this.h = 100;
-    this.w = 100;
+    this.location.y = this.h - this.h/2;
+    this.location.x = this.w - this.w/2;
+    this.h = 150;
+    this.w = 150;
     this.reg.x=this.w/2;
     this.reg.y=this.h/2;
     this.collRadius=this.w/2;
-    this.scale = 0.7;
+    this.scale = 1.2;
     
   }
 

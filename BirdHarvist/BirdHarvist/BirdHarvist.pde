@@ -1,27 +1,29 @@
 import processing.sound.*;
 import de.looksgood.ani.*;
 
-Bob s;
+Bird s;
 Basket b;
 int nSnake = 13;
 int counter = 0;
 Snake[] z = new Snake[nSnake];
 boolean test = false;
 Synth boing;
-PFont myfont;
+PFont startfont;
 
 static final int SPLASH = 0;
 static final int PLAY = 1;
 static final int LOOSE = 2;
+static final int WIN = 3;
 int gameState = SPLASH;
-
+PImage back;
 
 void setup()
 {
-  size(1200,800);
+  size(2429,766);
   //fullScreen();
   Ani.init(this);
-  myfont = createFont("elite.ttf",100);
+  back = loadImage("round.png");
+  startfont = createFont("Sigmar-Regular.ttf",100);
   gameStateChange(SPLASH);
   
 }
@@ -31,6 +33,7 @@ void draw()
   if(gameState == SPLASH) splash_run();
   if(gameState == PLAY) game_run();
   if(gameState == LOOSE) loose_run();
+  if(gameState == WIN) win_run();
 }
 
 void keyPressed()
@@ -38,6 +41,7 @@ void keyPressed()
   if(gameState == SPLASH) splash_keyPressed();
   if(gameState == PLAY) game_keyPressed();
   if(gameState == LOOSE) loose_keyPressed();
+  if(gameState == WIN) win_keyPressed();
 }
 
 void mouseClicked()
@@ -45,6 +49,7 @@ void mouseClicked()
   if(gameState == SPLASH) splash_mouseClicked();
   if(gameState == PLAY) game_mouseClicked(); 
   if(gameState == LOOSE) loose_mouseClicked();
+  if(gameState == WIN) win_mouseClicked();
 }
 
 void gameStateChange(int state)
@@ -53,12 +58,28 @@ void gameStateChange(int state)
   if(gameState == SPLASH) splash_init();
   if(gameState == PLAY) game_init();
   if(gameState == LOOSE) loose_init();
+  if(gameState == WIN) win_init();
 }
 
 /*splash stuff begin---------------------------------*/
+void win_init()
+{
+}
+
+void win_run()
+{
+}
+
+void win_keyPressed()
+{
+}
+void win_mouseClicked()
+{
+}
+/* win end losse begin ---------------------------------------*/
 void loose_init()
 {
-  s = new Bob("test");
+  s = new Bird("test");
 }
 
 void loose_run()
@@ -83,17 +104,17 @@ void loose_mouseClicked()
 /*splash stuff begin---------------------------------*/
 void splash_init()
 {
-  s = new Bob("test");
+  s = new Bird("test");
 }
 
 void splash_run()
 {
-  background(255,100,200);
+  background(100,250,200);
   textAlign(CENTER);
-  textFont(myfont);
+  textFont(startfont);
   textSize(100);
-  fill(255);
-  text("Press ANY key",width/2,height/2);
+  fill(255,100,100);
+  text("Press ANY key to begin",width/2,height/2);
   s.display();
   s.update();
   s.check();
@@ -116,7 +137,7 @@ void game_init()
 {
   boing = new Synth(this,1);
   b = new Basket("basket");
-  s = new Bob("test");
+  s = new Bird("test");
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i] = new Snake("snake"+i);
@@ -125,9 +146,13 @@ void game_init()
 
 void game_run()
 {
-  background(255);
+  background(back);
   fill(230);
+  if (test)
+  {
+    fill(color(0,0,255,100));
   rect(100,100,width-200,height-200);
+  }
   s.display();
   s.update();
   s.check();
@@ -146,6 +171,7 @@ void game_run()
 
 void game_keyPressed()
 {
+  
   s.acceleration.x = s.acceleration.x * (-1.0);
   s.velocity.x = s.acceleration.x * (-1.0);
 }

@@ -52,7 +52,7 @@ class Collision
     return(res);
   }
   
-  int circle2circle(Bob sprite)
+  int circle2circle(Bird sprite)
   {
     if(this.sprite.id != sprite.id)
     {
