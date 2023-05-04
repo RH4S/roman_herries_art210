@@ -4,6 +4,7 @@ class Sprite
   PVector location = new PVector(width/2,height/2);
   PVector velocity = new PVector(0,0);
   PVector acceleration = new PVector(0,0);
+  
  
   
   float w = 100;
@@ -48,7 +49,7 @@ class Sprite
     this.location.add(this.velocity);
   }
   
-  void display()
+ void display()
   {
     pushMatrix();
       translate(this.location.x,this.location.y);

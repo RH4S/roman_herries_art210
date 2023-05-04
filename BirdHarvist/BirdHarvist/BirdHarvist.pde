@@ -3,10 +3,11 @@ import de.looksgood.ani.*;
 
 Bird s;
 Basket b;
+timer ti;
 int nSnake = 13;
 int counter = 0;
 Snake[] z = new Snake[nSnake];
-boolean test = false;
+boolean test = true;
 Synth boing;
 PFont startfont;
 
@@ -52,6 +53,15 @@ void mouseClicked()
   if(gameState == WIN) win_mouseClicked();
 }
 
+void mouseReleased()
+{
+  if(gameState == SPLASH) splash_mouseReleased();
+  if(gameState == PLAY) game_mouseReleased(); 
+  if(gameState == LOOSE) loose_mouseReleased();
+  if(gameState == WIN) win_mouseReleased();
+}
+
+
 void gameStateChange(int state)
 {
   gameState = state;
@@ -76,6 +86,7 @@ void win_keyPressed()
 void win_mouseClicked()
 {
 }
+
 /* win end losse begin ---------------------------------------*/
 void loose_init()
 {
@@ -99,12 +110,18 @@ void loose_mouseClicked()
 {
 
 }
+
+void loose_mouseReleaed()
+{
+
+}
 /*splash stuff end-00--------------------------------*/
 
 /*splash stuff begin---------------------------------*/
 void splash_init()
 {
   s = new Bird("test");
+ 
 }
 
 void splash_run()
@@ -118,6 +135,7 @@ void splash_run()
   s.display();
   s.update();
   s.check();
+ 
 }
 
 void splash_keyPressed()
@@ -138,6 +156,7 @@ void game_init()
   boing = new Synth(this,1);
   b = new Basket("basket");
   s = new Bird("test");
+  ti = new timer("time");
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i] = new Snake("snake"+i);
@@ -159,6 +178,9 @@ void game_run()
   b.display();
   b.update();
   b.check();
+   ti.display();
+  ti.update();
+  ti.check();
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i].display();

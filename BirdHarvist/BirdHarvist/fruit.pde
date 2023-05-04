@@ -22,6 +22,7 @@ class Snake extends Sprite
   
   void check()
   {
+    Basket Ba = new Basket("BA");
     Collision coll = new Collision(this,true);
     int res = coll.box2circle(100,100,width-200,height-200+this.h,false);
     if(res == Collision.BOTTOM)
@@ -38,12 +39,11 @@ class Snake extends Sprite
     { 
        boing.hit();
        println("hit");
-      this.location.y = random(10,90);
-      this.location.x = random(10,90);
+      this.location.y = Ba.location.y + random(-40,40);
+      this.location.x = Ba.location.x + random(-40,40);
       this.velocity.x = 0;
       this.velocity.y = 0;
       this.acceleration.y = 0;  
-
       this.scale = 0.25;
       counter = counter + 1;
       println(counter);
