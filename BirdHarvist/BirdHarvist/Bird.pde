@@ -4,6 +4,7 @@ class Bird extends Sprite
   float groundL = height;
   String state = "run";
   float jumpSpeed=2.0;
+  Basket bas = new Basket("BAS");
   
   Bird(String id)
   {
@@ -35,7 +36,7 @@ class Bird extends Sprite
   
   void check()
   {
-    println(this.jumpSpeed);
+  
     if(this.state=="collect")
     {
       this.jumpSpeed = this.jumpSpeed+0.1;
@@ -61,7 +62,30 @@ class Bird extends Sprite
     }  
     Collision coll = new Collision(this,true);
     int res = coll.box2circle(100,100,width-200,height-200,false);
-    if(res == Collision.RIGHT || res == Collision.LEFT)
+    
+     if(res == Collision.TOP)
+    {
+      this.acceleration.y = this.acceleration.y * (-1.0);
+      this.velocity.y = this.velocity.y * (-1.0);
+    }
+     
+     if(res == Collision.TOP_RIGHT || res == Collision.TOP_LEFT)
+    {
+      this.acceleration.x = this.acceleration.x * (-1.0);
+      this.velocity.x = this.velocity.x * (-1.0);
+      this.acceleration.y = this.acceleration.y * (-1.0);
+      this.velocity.y = this.velocity.y * (-1.0);
+    }
+      this.velocity.limit(this.maxSpeed);
+    if(this.velocity.x < 0)
+    {
+      this.currentAnim = 1;
+    }
+    else
+    {
+      this.currentAnim = 0;
+    }
+ if(res == Collision.RIGHT || res == Collision.LEFT)
     {
       this.acceleration.x = this.acceleration.x * (-1.0);
       this.velocity.x = this.velocity.x * (-1.0);
@@ -75,6 +99,5 @@ class Bird extends Sprite
     {
       this.currentAnim = 0;
     }
-    
   }
 }

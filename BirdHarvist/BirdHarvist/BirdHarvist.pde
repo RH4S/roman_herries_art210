@@ -17,13 +17,19 @@ static final int LOOSE = 2;
 static final int WIN = 3;
 int gameState = SPLASH;
 PImage back;
-
+PImage winter;
+PImage spring;
 void setup()
 {
-  size(2429,766);
+  size(1200,800);
   //fullScreen();
   Ani.init(this);
+  winter = loadImage("winter.jpeg");
   back = loadImage("round.png");
+  spring = loadImage("spring.png");
+  back.resize(width,height);
+  winter.resize(width,height);
+  spring.resize(width,height);
   startfont = createFont("Sigmar-Regular.ttf",100);
   gameStateChange(SPLASH);
   
@@ -78,15 +84,27 @@ void win_init()
 
 void win_run()
 {
+  background(spring);
+  textAlign(CENTER);
+  textFont(startfont);
+  textSize(100);
+  fill(255,255,100);
+  text("welcome to spring",width/2,height/2);
 }
 
 void win_keyPressed()
 {
+  gameStateChange(PLAY);
+  ti.countDown = 30;
+  counter = 0;
+  
 }
 void win_mouseClicked()
 {
 }
-
+void win_mouseReleased()
+{
+}
 /* win end losse begin ---------------------------------------*/
 void loose_init()
 {
@@ -95,15 +113,20 @@ void loose_init()
 
 void loose_run()
 {
-  background(0,0,0);
-  s.display();
-  s.update();
-  s.check();
+  background(winter);
+  textAlign(CENTER);
+  textFont(startfont);
+  textSize(100);
+  fill(255,100,100);
+  text("you have starved",width/2,height/2);
+  
 }
 
 void loose_keyPressed()
 {
   gameStateChange(PLAY);
+  ti.countDown = 30;
+  counter = 0;
 }
 
 void loose_mouseClicked()
@@ -111,7 +134,7 @@ void loose_mouseClicked()
 
 }
 
-void loose_mouseReleaed()
+void loose_mouseReleased()
 {
 
 }
@@ -147,6 +170,9 @@ void splash_mouseClicked()
 {
 
 }
+void splash_mouseReleased()
+{
+}
 /*splash stuff end-00--------------------------------*/
 
 
@@ -160,7 +186,8 @@ void game_init()
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i] = new Snake("snake"+i);
-  }   
+  } 
+  
 }
 
 void game_run()
@@ -189,6 +216,7 @@ void game_run()
   }  
   boing.display();
   boing.update();
+  
 }
 
 void game_keyPressed()
@@ -202,5 +230,9 @@ void game_mouseClicked()
 {
   //boing.frequency = random(60,6000);
    boing.hit();
+   s.velocity.y = -10;
+}
+void game_mouseReleased()
+{
 }
 /*game stuff end---------------------------------*/

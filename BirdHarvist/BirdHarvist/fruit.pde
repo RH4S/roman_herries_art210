@@ -1,8 +1,11 @@
 class Snake extends Sprite
 {
+   Basket Ba = new Basket("BA");
   float maxSpeed = 3;
-  int harvist = 0;
+  
+  boolean colect = false;
   Snake(String id)
+  
   {
     super(id);
     this.acceleration = new PVector(0.0,.07);
@@ -20,9 +23,11 @@ class Snake extends Sprite
     this.scale = 0.5;
   }
   
+  
   void check()
   {
-    Basket Ba = new Basket("BA");
+   if (colect == false)
+    {
     Collision coll = new Collision(this,true);
     int res = coll.box2circle(100,100,width-200,height-200+this.h,false);
     if(res == Collision.BOTTOM)
@@ -34,7 +39,6 @@ class Snake extends Sprite
       this.acceleration.y = random(0.01,0.03);      
     }
     res = coll.circle2circle(s);
-     preCollState = collState;
     if(res == Collision.IN)
     { 
        boing.hit();
@@ -47,9 +51,9 @@ class Snake extends Sprite
       this.scale = 0.25;
       counter = counter + 1;
       println(counter);
-      
+      colect = true;
+      }
     }
-   
     
   }
   

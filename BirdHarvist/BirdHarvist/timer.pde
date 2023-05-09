@@ -1,9 +1,9 @@
 class timer extends Sprite
 {
-  int timer = 0;
+  int time = 0;
   int timerStart = 0;
   int countDown = 0;
-  int countDownStart = 20;
+  int countDownStart = 30;
   
 
   timer(String id)
@@ -23,18 +23,16 @@ class timer extends Sprite
   
   void display()
   {
-    
-    
     textAlign(CENTER);
     textFont(startfont);
     textSize(40);
     
   
   
-  timer = int(millis()/ 1000 - timerStart);     // counts up from the start time (0)
+  time = int(millis()/ 1000 - timerStart);     // counts up from the start time (0)
   
   
-  countDown = int (countDownStart - timer);   // counts down from the start time (20)
+  countDown = int (countDownStart - time);   // counts down from the start time (20)
  
   
   
@@ -42,5 +40,20 @@ class timer extends Sprite
   text ("Time Till Winter " + countDown , width/2, 200);    // display countdown
   
   }
-  
+  void check()
+{
+  if((countDown == 0) && (counter < 10))
+  {
+    gameState = LOOSE;
+    timerStart = millis() / 1000;
+    countDown  = countDownStart;
+  }
+  if((countDown == 0) && (counter > 9))
+  {
+    gameState = WIN;
+    timerStart = millis() / 1000;
+    countDown  = countDownStart;
+  }
+  println(countDown);
+}
 }

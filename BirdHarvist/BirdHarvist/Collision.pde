@@ -64,17 +64,7 @@ class Collision
     return(OUT);
   }
   
-  int circle2circle(Basket sprite)
-  {
-    if(this.sprite.id != sprite.id)
-    {
-      PVector distance = PVector.sub(this.sprite.location,sprite.location);
-      float d = distance.mag();
-      float minDistance = (this.sprite.collRadius + sprite.collRadius)/2.0;
-      if(d < minDistance) return(IN);
-    }  
-    return(OUT);
-  }
+  
   
   int box2box(float _x, float _y, float _w,float _h)
   {
