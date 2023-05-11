@@ -4,10 +4,11 @@ import de.looksgood.ani.*;
 Bird s;
 Basket b;
 timer ti;
+Score sc;
 int nSnake = 13;
 int counter = 0;
 Snake[] z = new Snake[nSnake];
-boolean test = true;
+boolean test = false;
 Synth boing;
 PFont startfont;
 
@@ -80,6 +81,7 @@ void gameStateChange(int state)
 /*splash stuff begin---------------------------------*/
 void win_init()
 {
+  s = new Bird("test");
 }
 
 void win_run()
@@ -90,14 +92,19 @@ void win_run()
   textSize(100);
   fill(255,255,100);
   text("welcome to spring",width/2,height/2);
+  s.display();
+  s.update();
+  s.check();
 }
 
 void win_keyPressed()
 {
-  gameStateChange(PLAY);
-  ti.countDown = 30;
+ /* gameStateChange(PLAY);
+ 
   counter = 0;
+  ti.time = 0;
   
+  */
 }
 void win_mouseClicked()
 {
@@ -124,14 +131,16 @@ void loose_run()
 
 void loose_keyPressed()
 {
-  gameStateChange(PLAY);
+ /* gameStateChange(PLAY);
   ti.countDown = 30;
   counter = 0;
+  */
 }
 
 void loose_mouseClicked()
 {
 
+ 
 }
 
 void loose_mouseReleased()
@@ -152,7 +161,7 @@ void splash_run()
   background(100,250,200);
   textAlign(CENTER);
   textFont(startfont);
-  textSize(100);
+  textSize(60);
   fill(255,100,100);
   text("Press ANY key to begin",width/2,height/2);
   s.display();
@@ -183,6 +192,7 @@ void game_init()
   b = new Basket("basket");
   s = new Bird("test");
   ti = new timer("time");
+  sc = new Score("score");
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i] = new Snake("snake"+i);
@@ -199,21 +209,26 @@ void game_run()
     fill(color(0,0,255,100));
   rect(100,100,width-200,height-200);
   }
-  s.display();
-  s.update();
-  s.check();
+  
   b.display();
   b.update();
   b.check();
-   ti.display();
-  ti.update();
-  ti.check();
   for(int i =0; i < nSnake; i =  i + 1)
   {
     z[i].display();
     z[i].update();
     z[i].check();
   }  
+  s.display();
+  s.update();
+  s.check();
+  ti.display();
+  ti.update();
+  ti.check();
+  sc.display();
+  sc.update();
+  sc.check();
+  
   boing.display();
   boing.update();
   
@@ -229,7 +244,7 @@ void game_keyPressed()
 void game_mouseClicked()
 {
   //boing.frequency = random(60,6000);
-   boing.hit();
+   //boing.hit();
    s.velocity.y = -10;
 }
 void game_mouseReleased()

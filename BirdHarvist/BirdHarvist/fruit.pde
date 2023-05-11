@@ -8,9 +8,9 @@ class Snake extends Sprite
   
   {
     super(id);
-    this.acceleration = new PVector(0.0,.07);
+    this.acceleration = new PVector(0.0,random(0.05, 0.07));
     this.registerAnimation(new Animation("snake","png"));
-    this.location.y = -this.h;
+    this.location.y = -this.h -random(0, this.h * 2);
     this.location.x = random(100,width-100);
     
     this.rotation = 90.0;
@@ -36,7 +36,7 @@ class Snake extends Sprite
       this.location.x = random(100,width-100);
       this.velocity.x = 0;
       this.velocity.y = 0;
-      this.acceleration.y = random(0.01,0.03);      
+      this.acceleration.y = random(0.05,0.07);      
     }
     res = coll.circle2circle(s);
     if(res == Collision.IN)

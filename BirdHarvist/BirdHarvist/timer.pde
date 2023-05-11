@@ -36,7 +36,7 @@ class timer extends Sprite
  
   
   
-  fill(100, 240, 140);  
+  fill(142, 219, 222);  
   text ("Time Till Winter " + countDown , width/2, 200);    // display countdown
   
   }
@@ -45,14 +45,14 @@ class timer extends Sprite
   if((countDown == 0) && (counter < 10))
   {
     gameState = LOOSE;
-    timerStart = millis() / 1000;
-    countDown  = countDownStart;
+    
+    
   }
   if((countDown == 0) && (counter > 9))
   {
     gameState = WIN;
-    timerStart = millis() / 1000;
-    countDown  = countDownStart;
+    
+    
   }
   println(countDown);
 }
